@@ -1,0 +1,14 @@
+/* Base CSS => @apply to using tailwind css */
+@layer base {
+    h1 {
+        font-size: 3em;
+    }
+}
+
+// Components => using custom layout or class in Components
+@layer components {
+}
+
+/* Utilities => using when you add one class no exist in tailwind */
+@layer utilities {
+}
