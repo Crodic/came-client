@@ -20,7 +20,7 @@ const DetailUserPage = () => {
         initialValues: {
             firstname: user?.firstname || "",
             lastname: user?.lastname || "",
-            password: "Cút",
+            password: "CAME_STORE_BCRYPT",
             email: user?.email || "",
             phone: user?.phone || "",
             address: user?.address || "",

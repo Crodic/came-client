@@ -7,6 +7,7 @@ import {
     DialogFooter,
     Input,
 } from "@material-tailwind/react";
+import { changePasswordNormal } from "../../../Services/authService";
 import { toast } from "react-toastify";
 
 const FieldForm = ({ value, label, name, type, onChange }) => {
@@ -31,13 +32,35 @@ const FieldForm = ({ value, label, name, type, onChange }) => {
             reNewPassword.length === 0
         ) {
             toast.error("Các trường không được để trống");
-        } else {
-            toast.success(
-                "Chức năng đang trong quá trình thực hiện. Vui Lòng Đợi Sau"
-            );
+            setOpen(!open);
+            return;
+        }
+        if (newPassword !== reNewPassword) {
+            toast.warning("Mật Khẩu Mới Không Trùng Khớp");
+            setOpen(!open);
+            return;
+        }
+
+        const obj = { password: password, newPassword: newPassword };
+        const status = fetchAlterPassword(obj);
+        if (status) {
+            toast.success("Đổi Mật Khẩu Thành Công");
         }
         setOpen(!open);
     };
+
+    const fetchAlterPassword = async (data) => {
+        try {
+            let res = await changePasswordNormal(data);
+            if (res && res.status === 200) {
+                return true;
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Đổi Mật Khẩu Thất Bại.");
+        }
+    };
+
     return type === "password" ? (
         <>
             <div>
@@ -81,16 +104,20 @@ const FieldForm = ({ value, label, name, type, onChange }) => {
                 <DialogBody divider>
                     <div className="grid gap-6">
                         <Input
+                            type="password"
+                            autoComplete="current-password"
                             label="Mật Khẩu Hiện Tại"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         <Input
+                            type="password"
                             label="Mật Khẩu Mới"
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                         />
                         <Input
+                            type="password"
                             label="Xác Nhận Lại Mật Khẩu"
                             value={reNewPassword}
                             onChange={(e) => setReNewPassword(e.target.value)}

@@ -55,3 +55,7 @@ export const deleteCart = (uid) => {
 export const editUser = (data) => {
     return authAxios.put(`/user`, data);
 }
+
+export const changePasswordNormal = (data) => {
+    return authAxios.put("/user/alter_password", data);
+}
