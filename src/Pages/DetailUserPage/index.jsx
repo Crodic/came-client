@@ -47,13 +47,11 @@ const DetailUserPage = () => {
             phone: Yup.string()
                 .trim()
                 .min(10, "phone is not define")
-                .max(12)
-                .required("Phone is Required"),
+                .max(12, "phone is not define"),
             address: Yup.string()
                 .trim()
-                .min(5)
-                .max(100)
-                .required("Address is required"),
+                .min(5, "Address is very low")
+                .max(100, "address is very long"),
         }),
         onSubmit: (e) => {
             delete e.password;
