@@ -34,7 +34,7 @@ const Deal = ({ data }) => {
                 </div>
                 <div>
                     <h4 className="text-base font-light w-full text-center line-clamp-3 hover:text-red-500 transition-colors duration-150">
-                        <Link to={`/products/${data._id}`}>{data.title}</Link>
+                        <Link to={`/products/${data?._id}`}>{data?.title}</Link>
                     </h4>
                 </div>
                 <div className="flex justify-center items-center mt-3">
@@ -64,11 +64,11 @@ const Deal = ({ data }) => {
                     </svg>
                 </div>
                 <div className="w-full text-center mt-3">
-                    <p>{data && data.price && formatCurrency(data.price)}</p>
+                    <p>{data && data.price && formatCurrency(data?.price)}</p>
                 </div>
                 <div className="w-full text-center mt-[15px] text-white">
                     <button
-                        onClick={() => handleNavigate(data._id)}
+                        onClick={() => handleNavigate(data?._id)}
                         className="bg-red-500 w-full px-[15px] py-[11px] flex justify-center items-center font-poppins border-white hover:bg-black transition-colors duration-300"
                     >
                         <svg
